@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{width:80px;height:80px;border-radius:8px;}
+    </style>
+</head>
+<body>
+<h1>购物车页面</h1>
+<h3><a href="{% url 'myshopping:index'%}">返回首页</a></h3>
+<h2>已经购买的商品</h2>
+{% if gl %}
+    {% for scgoods in gl%}
+    <p>
+        <span>商品图片：
+            <img src="{{scgoods.goods.goodsimage_set.first.path}}" alt="">
+        </span>
+        <span>商品名称：{{scgoods.goods.name}}</span>
+        <span>成交价格：{{scgoods.deal_price}}</span>
+        <span>成交时间：{{scgoods.deal_time}}</span>
+        <span>购买数量：{{scgoods.deal_count}}</span>
+        <span>小计金额：</span>
+    </p>
+    {% endfor %}
+{% else %}
+    <p>你的购物车中暂时没有商品</p>
+{% endif%}
+</body>
+</html>

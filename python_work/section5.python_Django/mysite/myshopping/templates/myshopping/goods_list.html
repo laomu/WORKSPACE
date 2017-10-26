@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{width:150px;height:150px;border-radius:8px;}
+    </style>
+</head>
+<body>
+<h1>商品列表页</h1>
+<h3><a href="{% url 'myshopping:index'%}">返回首页</a></h3>
+<hr>
+<hr>
+{%for goods in gl%}
+<p>商品编号：{{forloop.counter}}</p>
+<p>商品名称：{{goods.name}}</p>
+<p>商品单价：{{goods.price}}</p>
+<p>商品描述：{{goods.desc}}</p>
+<p>商品图片：
+    {% for img in goods.goodsimage_set.all%}
+    <img src="{{img.path}}" alt="">
+    {% endfor %}
+</p>
+<p><a href="{% url 'myshopping:detail' goods.id %}">查看更多</a></p>
+<hr>
+<hr>
+{% endfor %}
+
+</body>
+</html>

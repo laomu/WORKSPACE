@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公司首页</title>
+</head>
+<body>
+<h1>公司首页</h1>
+{% if user %}
+<h2>尊敬的用户{{user.username}}您好 <small><a href="{% url 'commons:logout' %}">安全退出</a></small></h2>
+{% endif%}
+<h3><a href="{% url 'myblog:index' %}">博客</a></h3>
+<h3><a href="#">新闻</a></h3>
+<h3><a href="{% url 'myvideo:index' %}">影视</a></h3>
+<h3><a href="#">音乐</a></h3>
+<h3><a href="{% url 'myshopping:index' %}">购物</a></h3>
+</body>
+</html>

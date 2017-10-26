@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{width:140px;height:180px;border-radius:5px;}
+    </style>
+</head>
+<body>
+<h1>PXPX首页</h1>
+<form action="{% url 'myvideo:vsearch'%}">
+    <input type="text" name="keyword">
+    <input type="submit" value="搜索">
+</form>
+<hr>
+<hr>
+<ul>
+    {% for type in vt%}
+        <li><a href="{% url 'myvideo:vtlist' type.id%}">{{type.name}}</a>
+            <ul>
+            {% for t_2 in type.videodetailtype_set.all%}
+                <li><a href="{% url 'myvideo:vdtlist' t_2.id%}">{{t_2.name}}</a></li>
+            {% endfor %}
+                </ul>
+        </li>
+
+    {% endfor %}
+</ul>
+<hr>
+<hr>
+
+<h2>动漫频道</h2>
+<hr>
+<hr>
+{% if v_dm %}
+    {% for video in v_dm %}
+    <hr>
+    <p><img src="{{video.cover}}" alt=""></p>
+    <p>名称：{{video.title}}</p>
+    <p>上传用户：{{video.user.username}}</p>
+    <p>上传时间：{{video.publish_time}}</p>
+    <p>描述：{{video.intro}}</p>
+    <p><a href="{% url 'myvideo:vdetail' video.id%}">查看更多</a></p>
+    {% endfor %}
+{% else %}
+<p>暂时没有动漫视频</p>
+{% endif %}
+<hr>
+<hr>
+<h2>游戏频道</h2>
+<hr>
+<hr>
+{% if v_game %}
+    {% for video in v_game %}
+    <hr>
+    <p><img src="{{video.cover}}" alt=""></p>
+    <p>名称：{{video.title}}</p>
+    <p>上传用户：{{video.user.username}}</p>
+    <p>上传时间：{{video.publish_time}}</p>
+    <p>描述：{{video.intro}}</p>
+    <p><a href="{% url 'myvideo:vdetail' video.id%}">查看更多</a></p>
+    {% endfor %}
+{% else %}
+<p>暂时没有游戏视频</p>
+{% endif %}
+<hr>
+<hr>
+<h2>影视频道</h2>
+<hr>
+<hr>
+{% if v_ys %}
+    {% for video in v_ys %}
+    <hr>
+    <p><img src="{{video.cover}}" alt=""></p>
+    <p>名称：{{video.title}}</p>
+    <p>上传用户：{{video.user.username}}</p>
+    <p>上传时间：{{video.publish_time}}</p>
+    <p>描述：{{video.intro}}</p>
+    <p><a href="{% url 'myvideo:vdetail' video.id%}">查看更多</a></p>
+    {% endfor %}
+
+{% else %}
+<p>暂时没有影视视频</p>
+{% endif %}
+</body>
+</html>

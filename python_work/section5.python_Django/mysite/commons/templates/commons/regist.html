@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公共用户注册页面</title>
+    {% load static %}
+</head>
+<body>
+    <h1>项目公共用户注册页面</h1>
+    <h3>{{msg}}</h3>
+    <form action="{% url 'commons:regist' %}" method="post">
+        {% csrf_token %}
+        账号：<input type="text" name="username"><br />
+        密码：<input type="text" name="password"><br />
+        确认密码：<input type="text" name="password2"><br />
+        <input type="submit" value="注册">
+    </form>
+</body>
+</html>

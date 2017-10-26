@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{width:200px;height:200px;border-radius: 8px;}
+    </style>
+</head>
+<body>
+<h1>电商首页</h1>
+<h2><a href="{% url 'myshopping:shopcart' %}">我的购物车</a></h2>
+<h2>商品搜索</h2>
+<form action="{% url 'myshopping:search_kw' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="search" id="search">
+    <input type="submit" value="搜索">
+</form>
+<hr>
+<hr>
+<h2>商品类型</h2>
+<ul>
+    {% for type in tl%}
+        <li><a href="{% url 'myshopping:search_type' type.id %}">{{type.name}}</a>
+            <ul>
+                {% for t in type.goodsdetailtype_set.all%}
+                    <li><a href="{% url 'myshopping:search_dtype' t.id %}">{{t.name}}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+<hr>
+<hr>
+<h1>首页展示热门商品</h1>
+<h2>键盘数据 <small>最新键盘</small></h2>
+{% if kb %}
+    {% for goods in kb %}
+        <p>商品名称：{{goods.name}}</p>
+        <p>商品单价：{{goods.price}}</p>
+    {% endfor %}
+{% else %}
+    <p>暂时没有商品数据</p>
+{% endif %}
+<hr>
+<h2>个人PC <small>最新电脑信息</small></h2>
+{% if pc %}
+    {% for goods in pc %}
+        <hr/>
+        <p>商品名称：{{goods.name}}</p>
+        <p>商品单价：{{goods.price}}</p>
+        <p>商品图片：
+            {% for img in goods.goodsimage_set.all%}
+                <span><img src="{{img.path}}" alt=""></span>
+            {% endfor %}
+        </p>
+    {% endfor %}
+{% else %}
+    <p>暂时没有商品数据</p>
+{% endif %}
+</body>
+</html>

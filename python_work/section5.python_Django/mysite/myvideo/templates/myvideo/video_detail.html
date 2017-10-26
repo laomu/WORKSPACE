@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{width:400px;height:450px;border-radius:8px;}
+    </style>
+</head>
+<body>
+    <h1>视频详情</h1>
+    <p>
+        <img src="{{video.cover}}" alt="">
+    </p>
+<p>视频标题：{{video.title}}</p>
+<p>上传用户：{{video.user.username}}</p>
+<p>上传时间：{{video.publish_time}}</p>
+<p>视频介绍：{{video.intro}}</p>
+<p><a href="{% url 'myvideo:vplay' video.id%}">在线播放</a></p>
+</body>
+</html>
